@@ -1,0 +1,901 @@
+---
+title: "Untitled"
+author: "Hanounou Kanouté"
+date: "2023-09-11"
+output: html_document# metrre un lien flash up
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Import des données
+```{r, eval=FALSE} 
+#ne lance pas le code dans le chunck a chaque lancement de run
+library(data.table)
+#emission=fread("data/sites_polluants/2021/emissions.csv") chemin d'acces de notre base rapatrie nos données 
+
+```
+
+
+```{r}
+library(dplyr)
+```
+
+
+```{r}
+df=read.csv("lieux(1).csv", header=T,sep=";")
+head(df)
+```
+
+
+```{r}
+# Imputation par la moyenne
+df$voie <- as.integer(df$voie)
+df$voie[is.na(df$voie)] <- median(df$voie, na.rm = TRUE)
+print(df)
+# Vérifier si la colonne "Colonne1" n'est pas vide
+colonne_non_vide <- all(!is.na(df$voie) & df$voie != "")
+
+if (colonne_non_vide) {
+  print("La colonne 'Colonne1' n'est pas vide.")
+} else {
+  print("La colonne 'Colonne1' est vide.")
+}
+```
+
+```{r}
+# Imputation par le mode
+df$circ <- as.integer(df$circ)
+df$circ[is.na(df$circ)] <- as.integer(mode(df$circ))
+# Convertir la colonne de texte en format numérique
+print(df)
+# Vérifier si la colonne "Colonne1" n'est pas vide
+colonne_non_vide <- all(!is.na(df$circ) & df$circ != "")
+
+if (colonne_non_vide) {
+  print("La colonne 'Colonne1' n'est pas vide.")
+} else {
+  print("La colonne 'Colonne1' est vide.")
+}
+```
+
+```{r}
+# Imputation par le mode
+df$nbv[is.na(df$nbv)] <- as.integer(mode(df$nbv))
+# Convertir la colonne de texte en format numérique
+# Vérifier si la colonne "Colonne1" n'est pas vide
+colonne_non_vide <- all(!is.na(df$nbv) & df$nbv != "")
+
+if (colonne_non_vide) {
+  print("La colonne 'Colonne1' n'est pas vide.")
+} else {
+  print("La colonne 'Colonne1' est vide.")
+}
+print(df)
+```
+
+
+```{r}
+# Convertir la colonne de caractères en entiers
+df$prof <- as.integer(df$prof)
+
+# Afficher le dataframe après la conversion
+print(df)
+```
+
+```{r}
+# Imputation par le mode
+df$prof <- as.integer(df$prof)
+df$prof[is.na(df$prof)] <- as.integer(mode(df$prof))
+# Convertir la colonne de texte en format numérique
+print(df)
+```
+
+
+```{r}
+# Imputation par le mode
+df$plan <- as.integer(df$plan)
+df$plan[is.na(df$plan)] <- as.integer(mode(df$plan))
+# Convertir la colonne de texte en format numérique
+print(df)
+```
+
+```{r}
+# Imputation par le mode
+df$surf <- as.integer(df$surf)
+df$surf[is.na(df$surf)] <- as.integer(mode(df$surf))
+# Convertir la colonne de texte en format numérique
+print(df)
+
+```
+
+```{r}
+# Imputation par le mode
+df$infra <- as.integer(df$infra)
+df$infra[is.na(df$infra)] <- as.integer(mode(df$infra))
+# Convertion la colonne de texte en format numérique
+print(df)
+
+```
+
+```{r}
+# Imputation par le mode
+df$situ <- as.integer(df$situ)
+df$situ[is.na(df$situ)] <- as.integer(mode(df$situ))
+# Convertion la colonne de texte en format numérique
+print(df)
+
+```
+```{r}
+# Imputation par le mode
+df$env1 <- as.integer(df$env1)
+df$env1[is.na(df$env1)] <- as.integer(mode(df$env1))
+# Convertion la colonne de texte en format numérique
+print(df)
+```
+
+```{r}
+# Enregistrer la base de données modifiée dans un nouveau fichier CSV
+#write.csv(df, file = "lieux(2).csv", row.names = FALSE)
+# Enregistrer le dataframe en tant que fichier Excel
+write.csv(df, "lieux(2).csv")
+```
+
+```{r}
+df=read.csv("veh(1).csv", header=T,sep=";")
+head(df)
+```
+
+
+```{r}
+# Charger la bibliothèque dplyr
+library(dplyr)
+
+# Imputation par le mode
+df$senc[is.na(df$senc)] <- as.integer(mode(df$senc))
+print(df)
+```
+
+```{r}
+# Imputation par le mode
+df$obs[is.na(df$obs)] <- as.integer(mode(df$obs))
+print(df)
+```
+
+```{r}
+# Imputation par le mode
+df$obsm[is.na(df$obsm)] <- as.integer(mode(df$obsm))
+print(df)
+```
+
+```{r}
+# Imputation par le mode
+df$choc[is.na(df$choc)] <- as.integer(mode(df$choc))
+print(df)
+```
+
+```{r}
+# Imputation par le mode
+df$manv[is.na(df$manv)] <- as.integer(mode(df$manv))
+print(df)
+```
+
+```{r}
+# Enregistrer la base de données modifiée dans un nouveau fichier CSV
+write.csv(df, file = "veh(2).csv", row.names = FALSE)
+```
+
+```{r}
+df=read.csv("carac(1).csv", header=T,sep=";")
+head(df)
+```
+
+
+```{r}
+# Imputation par le mode
+df$atm[is.na(df$atm)] <- as.integer(mode(df$atm))
+print(df)
+```
+
+```{r}
+# Imputation par la moyonne
+df$lat <- as.integer(df$lat)
+df$lat[is.na(df$lat)] <- mean(df$lat, na.rm = TRUE)
+print(df)
+```
+```{r}
+# Imputation par le mode
+df$atm[is.na(df$col)] <- as.integer(mode(df$col))
+print(df)
+```
+moyenne lat
+
+```{r}
+# Imputation par la moyenne
+df$long <- as.integer(df$long)
+df$long[is.na(df$long)] <- median(df$long, na.rm = TRUE)
+print(df)
+```
+```{r}
+# Enregistrer la base de données modifiée dans un nouveau fichier CSV
+write.csv(df, file = "carac(2).csv", row.names = FALSE)
+```
+
+
+```{r}
+df=read.csv("vict(1).csv", header=T,sep=";")
+head(df)
+```
+```{r}
+# Imputation par le mode
+df$place[is.na(df$place)] <- as.integer(mode(df$place))
+print(df)
+```
+```{r}
+# Imputation par le mode
+df$trajet[is.na(df$trajet)] <- as.integer(mode(df$trajet))
+print(df)
+```
+
+
+mode secu
+```{r}
+# Imputation par la moyenne
+df$an_nais <- as.integer(df$an_nais)
+df$an_nais[is.na(df$an_nais)] <- median(df$an_nais, na.rm = TRUE)
+print(df)
+```
+```{r}
+# Enregistrer la base de données modifiée dans un nouveau fichier CSV
+write.csv(df, file = "vict(2).csv", row.names = FALSE)
+```
+
+
+```{r}
+
+immo=read.csv("vict(2).csv", header=T,sep=";") 
+head(immo)
+# Supposons que votre dataframe initial s'appelle df
+
+# Sélection des colonnes spécifiques
+selected_columns <- c("Num_Acc", "place", "catu", "grav", "sexe", "trajet", "secu", "locp", "actp", "etatp", "an_nais", "num_veh")
+df_selected <- df[selected_columns]
+immo=df_selected
+# Affichage du nouveau dataframe
+print(df_selected)
+
+```
+```{r}
+reg.mul=lm(grav~catu+sexe+trajet+secu+an_nais, immo)
+analyse=anova(reg.mul)
+analyse
+summary(reg.mul)
+```
+```{r}
+immo1=read.csv("gveh(1).csv", header=T,sep=";") 
+head(immo1)
+
+```
+
+
+```{r}
+reg.mul1=lm(grav~senc+catv+occutc+obs+obsm+choc+manv+num_veh, immo1)
+analyse1=anova(reg.mul1)
+analyse1
+summary(reg.mul1)
+
+```
+
+
+
+```{r}
+immo2=read.csv("gcarac(1).csv", header=T,sep=";") 
+head(immo2)
+```
+```{r}
+reg.mul2=lm(grav~an+mois+jour+hrmn+lum+agg+int+atm+col+dep, immo2)
+analyse2=anova(reg.mul2)
+analyse2
+summary(reg.mul2)
+```
+
+
+
+```{r}
+reg.mul20=lm(grav~lat+long, immo2)
+analyse20=anova(reg.mul20)
+analyse20
+summary(reg.mul20)
+```
+
+
+```{r}
+immo3=read.csv("glieux(1).csv", header=T,sep=";") 
+head(immo3)
+
+```
+
+```{r}
+reg.mul3=lm(grav~catr+circ+nbv+prof+plan+surf+infra+situ+env1, immo3)
+analyse3=anova(reg.mul3)
+analyse3
+summary(reg.mul3)
+```
+#j'ai traité ici les 4 fichiers avec la variable grav ajoutée. 
+
+```{css}
+.value-box {
+  height: 60px;
+}
+  
+.value-box .value{
+  font-size: 10px;
+}
+
+.value-box .caption{
+  font-size: 10px;
+}
+```
+```{r}
+#install.packages("fastmap")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning=FALSE,
+                      message=FALSE,
+                      fig.asp=0.618)
+```
+
+```{r librairie, include=FALSE}
+library(rlang)
+library(tidyr)
+
+library(tidyverse) #Pour le pipe %>%
+library(data.table)
+library(waterfalls) #Pour le waterfall
+library(flexdashboard)
+
+theme_set(theme_bw())
+my_blue <- rgb(red=12,green=47,blue=127,maxColorValue = 255)
+my_green <- rgb(45,208,75,maxColorValue = 255)
+```
+
+```{r import}
+#Il faut utiliser l'encodage UTF-8 sur le fichier excel.
+#Le fichier source n'est pas en UTF-8.
+#Nous avons dû enregistrer le fichier source dans le bon format.
+
+df <- read.csv('significatifs.csv',header = TRUE)
+str(df)
+df
+```
+
+
+```{r}
+#install.packages("cli")
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+  # Supposons que votre dataframe s'appelle df
+df <- df %>%
+  separate(col = "grav.circ.plan.surf.situ.env1.catv.occutc.obs.obsm.choc.catu.sexe.trajet.secu.an_nais.hrmn.lum.col.lat.long.dep",
+           into = c("grav", "circ", "plan", "surf", "situ", "env1", "catv", "occutc", "obs", "obsm", "choc", "catu", "sexe", "trajet", "secu", "an_nais", "hrmn", "lum", "col", "lat", "long", "dep"),
+           sep = ";")
+
+# Création d'une table de répartition
+dt <- df %>%
+  group_by(grav) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count),
+         label_position = cumsum(percentage) - 0.5 * percentage,
+         label = paste0(grav, "\n", scales::number(count, big.mark = " ")),
+         label_percentage = str_c(round(100 * percentage, 1), "%"))
+
+# Création du graphique camembert
+ggplot(dt, aes(x = 2, y = percentage, fill = grav)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  geom_text(aes(y = label_position, label = label), color = "black", size = 3) +
+  geom_text(aes(y = label_position, label = label_percentage), color = "black", size = 2) +
+  theme_void() +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+str(df)
+```
+```{r}
+# Boucle à travers toutes les colonnes du dataframe
+for (col in names(df)) {
+  # Convertir la colonne en numérique
+  df[[col]] <- as.numeric(df[[col]])
+}
+
+# Afficher la structure mise à jour du dataframe
+str(df)
+
+
+```
+
+```{r}
+# Vérifier les valeurs uniques dans la colonne grav
+unique_values <- unique(df$grav)
+print(unique_values)
+
+
+```
+```{r}
+# Exclure les valeurs 707 et 5, puis convertir le reste en numérique
+df$grav <- as.numeric(df$grav[df$grav %in% c("3", "1", "4", "2", "707", "5")])
+
+
+```
+
+```{r}
+# Exclure les valeurs 707 et 5, puis convertir le reste en numérique
+df$grav <- as.numeric(df$grav[df$grav %in% c("3", "1", "4", "2", "707", "5")])
+
+# Exclure à nouveau les valeurs 707 et 5
+df <- df[df$grav %in% c(3, 1, 4, 2), ]
+
+# Vérifier les niveaux après la conversion
+levels(df$grav)
+
+```
+```{r}
+unique_values <- unique(df$grav)
+print(unique_values)
+
+```
+```{r}
+library(ggplot2)
+
+
+# Calculer les proportions
+proportions <- table(df$grav) / length(df$grav)
+
+# Créer un dataframe pour le graphique
+data_pie <- data.frame(
+  Categorie = as.factor(c("1 – Indemne", "2 – Tué", "3 – Blessé hospitalisé", "4 – Blessé léger")),
+  Pourcentage = proportions
+)
+
+# Créer le graphique camembert
+ggplot(data_pie, aes(x = "", y = proportions, fill = Categorie)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  theme_void() +
+  labs(title = "Répartition des gravités d'accidents")
+
+
+
+```
+
+on rajoute l'age des personnes
+```{r}
+current_year <- 2022
+df$age <- current_year - as.numeric(df$an_nais)
+
+```
+
+```{r}
+library(dplyr)
+
+df_summary <- df %>%
+  group_by(grav) %>%
+  summarize(mean_age = mean(as.numeric(an_nais)))
+df
+```
+```{r}
+# Charger le package dplyr
+library(dplyr)
+
+# Convertir toutes les colonnes en numérique (comme vous l'avez demandé)
+for (col in names(df)) {
+  df[[col]] <- as.numeric(df[[col]])
+}
+
+# Filtrer les données pour avoir uniquement les conducteurs
+conducteurs <- df %>%
+  filter(catu == 1)
+
+# Comparer les niveaux d'accidents en termes de nombre d'accidents par sexe
+comparaison_sexe <- conducteurs %>%
+  group_by(sexe, grav) %>%
+  summarise(nombre_accidents = n())
+
+# Afficher les résultats
+print(comparaison_sexe)
+
+```
+
+```{r}
+# Charger le package dplyr pour la manipulation des données
+library(dplyr)
+
+# Charger le package ggplot2 pour la visualisation
+library(ggplot2)
+
+# Convertir toutes les colonnes en numérique
+for (col in names(df)) {
+  df[[col]] <- as.numeric(df[[col]])
+}
+
+# Filtrer les données pour avoir uniquement les conducteurs
+conducteurs <- df %>%
+  filter(catu == 1)
+
+# Comparer les niveaux d'accidents en termes de nombre d'accidents par sexe
+comparaison_sexe <- conducteurs %>%
+  group_by(sexe, grav) %>%
+  summarise(nombre_accidents = n())
+
+# Créer un histogramme
+histogramme <- ggplot(comparaison_sexe, aes(x = grav, fill = as.factor(sexe))) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Comparaison de la gravité des accidents par sexe des conducteurs",
+       x = "Gravité de l'accident",
+       y = "Nombre d'accidents") +
+  scale_fill_discrete(name = "Sexe des conducteurs", labels = c("Femme", "Homme"))
+
+# Afficher l'histogramme
+print(histogramme)
+
+```
+
+```{r}
+# Charger le package ggplot2 pour la visualisation
+library(ggplot2)
+
+# Convertir la colonne "an_nais" en numérique si ce n'est pas déjà fait
+df$an_nais <- as.numeric(df$an_nais)
+
+# Créer un histogramme
+histogramme_age_gravite <- ggplot(df, aes(x = an_nais, fill = as.factor(grav))) +
+  geom_histogram(binwidth = 5, position = "dodge", color = "black", alpha = 0.7) +
+  labs(title = "Histogramme des gravités en fonction de l'âge",
+       x = "Âge",
+       y = "Nombre d'accidents",
+       fill = "Gravité") +
+  scale_fill_manual(
+    values = c("1" = "green", "2" = "yellow", "3" = "red", "4" = "blue"),
+    breaks = c("1", "2", "3", "4"),
+    labels = c("1 – Indemne", "2 – Tué", "3 – Blessé hospitalisé", "4 – Blessé léger")
+  ) +
+  theme_minimal()
+
+# Afficher l'histogramme
+print(histogramme_age_gravite)
+
+```
+```{r}
+library(data.table)
+# Remplacer les valeurs de la variable "circ" par des descriptions
+df$circ[df$circ == 0] <- "Non renseigné"
+df$circ[df$circ == 1] <- "A sens unique"
+df$circ[df$circ == 2] <- "Bidirectionnelle"
+df$circ[df$circ == 3] <- "A chaussées séparées"
+df$circ[df$circ == 4] <- "Avec voies d’affectation"
+
+# Convertir le dataframe en data.table
+dt <- as.data.table(df)
+
+# Calculer la fréquence des valeurs dans la colonne "circ"
+lcirc <- dt[, .(value = .N), by = circ]
+
+# Afficher les résultats
+print(lcirc)
+
+```
+```{r}
+ggplot(lcirc)+geom_bar(aes(x="",y=value,fill=circ),stat="identity",width = 1)
+```
+```{r}
+lcirc$perc=lcirc$value/sum(lcirc$value)
+lcirc
+```
+```{r}
+
+# Charger le package ggplot2 pour la visualisation
+library(ggplot2)
+
+# Remplacer les valeurs de la colonne "situ" par des descriptions
+df$situ[df$situ == -1] <- "Non renseigné"
+df$situ[df$situ == 0] <- "Aucun"
+df$situ[df$situ == 1] <- "Sur chaussée"
+df$situ[df$situ == 2] <- "Sur bande d’arrêt d’urgence"
+df$situ[df$situ == 3] <- "Sur accotement"
+df$situ[df$situ == 4] <- "Sur trottoir"
+df$situ[df$situ == 5] <- "Sur piste cyclable"
+df$situ[df$situ == 6] <- "Sur autre voie spéciale"
+df$situ[df$situ == 8] <- "Autres"
+
+# Créer un graphique à barres empilées
+graphique_situ_accident <- ggplot(df, aes(x = "", fill = situ)) +
+  geom_bar(position = "stack", color = "white") +
+  scale_fill_brewer(palette = "Set3") +  # Utiliser une palette de couleurs (vous pouvez ajuster la palette selon vos préférences)
+  theme_minimal() +
+  labs(fill = "Situation de l'accident") +
+  coord_flip()
+
+# Afficher le graphique à barres empilées
+print(graphique_situ_accident)
+
+
+```
+
+```{r}
+ggplot(lcirc)+geom_bar(aes(x="",y=perc,fill=circ),stat="identity")+
+  theme_void()+
+  labs(fill="Régime de circulation ")
+```
+```{r}
+ggplot(lcirc)+geom_bar(aes(x="",y=perc,fill=circ),stat="identity",width = 0.1)+coord_polar(theta = "y")+
+  theme_void()+
+  labs(fill="Régime de circulation")
+```
+```{r}
+# Remplacer les valeurs de la colonne "lobs" par des descriptions
+dt$obs[dt$lobs == -1] <- "Non renseigné"
+dt$obs[dt$obs == 0] <- "Sans objet"
+dt$obs[dt$obs == 1] <- "Véhicule en stationnement"
+dt$obs[dt$obs == 2] <- "Arbre"
+dt$obs[dt$obs == 3] <- "Glissière métallique"
+dt$obs[dt$obs == 4] <- "Glissière béton"
+dt$obs[dt$obs == 5] <- "Autre glissière"
+dt$obs[dt$obs == 6] <- "Bâtiment, mur, pile de pont"
+dt$obs[dt$obs == 7] <- "Support de signalisation verticale ou poste d’appel d’urgence"
+dt$obs[dt$obs == 8] <- "Poteau"
+dt$obs[dt$obs == 9] <- "Mobilier urbain"
+dt$obs[dt$obs == 10] <- "Parapet"
+dt$obs[dt$obs == 11] <- "Ilot, refuge, borne haute"
+dt$obs[dt$obs == 12] <- "Bordure de trottoir"
+dt$obs[dt$obs == 13] <- "Fossé, talus, paroi rocheuse"
+dt$obs[dt$obs == 14] <- "Autre obstacle fixe sur chaussée"
+dt$obs[dt$obs == 15] <- "Autre obstacle fixe sur trottoir ou accotement"
+dt$obs[dt$obs == 16] <- "Sortie de chaussée sans obstacle"
+dt$obs[dt$obs == 17] <- "Buse – tête d’aqueduc"
+# Calculer la fréquence des valeurs dans la colonne "circ"
+lobs <- dt[, .(value = .N), by = obs]
+lobs$perc=lobs$value/sum(lcirc$value)
+# Afficher les résultats
+print(lobs)
+```
+```{r}
+
+ggplot(lobs)+geom_bar(aes(x="",y=perc,fill=obs),stat="identity",width = 0.1)+coord_polar(theta = "y")+
+  theme_void()+
+  labs(fill="Catégories de routes")
+```
+
+
+
+```{r}
+# Supposons que votre dataframe s'appelle 'df'
+
+library(ggplot2)
+
+# Créer l'histogramme
+ggplot(dt, aes(x = grav, fill = as.factor(sexe))) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Répartition de la gravité en fonction du sexe", x = "Gravité", y = "Nombre d'accidents") +
+  scale_fill_manual(values = c("blue", "pink"))  # Choisir les couleurs pour les barres (bleu pour homme, rose pour femme)
+
+```
+
+
+```{r}
+
+library(ggplot2)
+
+
+# Créer l'histogramme
+ggplot(dt, aes(x = as.factor(grav), fill = as.factor(catu), color = sexe)) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Répartition de la gravité en fonction du sexe et de la catégorie d'usager",
+       x = "Gravité",
+       y = "Nombre d'accidents",
+       fill = "Catégorie d'usager",
+       color = "Sexe") +
+  scale_fill_manual(values = c("blue", "green", "red")) +
+  scale_color_manual(values = c("M" = "black", "F" = "white"))
+
+```
+
+```{r}
+dt
+```
+```{r}
+# Charger les packages nécessaires
+library(ggplot2)
+library(data.table)
+
+# Convertir dt en data.table si ce n'est pas déjà fait
+dt <- data.table(dt)
+
+# Agréger les données par département et compter le nombre d'accidents
+agg_data <- dt[, .(nb_accidents = .N), by = dep]
+
+# Imprimer les premières lignes de agg_data pour vérification
+print(head(agg_data))
+
+# Charger la carte de la France depuis le package 'maps'
+france_map <- map_data("france")
+
+# Fusionner les données agrégées avec les données de la carte
+merged_data <- merge(france_map, agg_data, by.x = "region", by.y = "dep", all.x = TRUE)
+
+# Imprimer les premières lignes de merged_data pour vérification
+print(head(merged_data))
+
+# Remplacer les NA par 0 si nécessaire
+merged_data[is.na(merged_data$nb_accidents), "nb_accidents"] <- 0
+
+# Imprimer le résumé des valeurs de nb_accidents pour vérification
+print(summary(merged_data$nb_accidents))
+
+# Créer la carte
+ggplot(merged_data, aes(x = long, y = lat, group = group, fill = nb_accidents)) +
+  geom_polygon(color = "white", size = 0.2) +
+  scale_fill_gradient(low = "lightblue", high = "darkred", name = "Nombre d'accidents") +
+  theme_minimal() +
+  labs(title = "Carte de la France - Nombre d'accidents par région")
+
+```
+
+
+```{r}
+df$grav <- factor(df$grav, levels = c("1", "2", "3", "4"))
+
+```
+
+```{r}
+set.seed(123)
+indices <- sample(1:nrow(df), 0.7 * nrow(df))
+train_data <- df[indices, ]
+test_data <- df[-indices, ]
+
+```
+
+```{r}
+levels(train_data$grav)
+
+```
+```{r}
+levels(test_data$grav)
+```
+```{r}
+any(is.na(train_data))
+
+```
+
+```{r}
+library(tidyr)
+
+# Remplacer les valeurs manquantes par la moyenne
+train_data$lat <- replace_na(train_data$lat, mean(train_data$lat, na.rm = TRUE))
+train_data$long <- replace_na(train_data$long, mean(train_data$long, na.rm = TRUE))
+train_data$dep <- replace_na(train_data$dep, mean(train_data$dep, na.rm = TRUE))
+train_data$hrmn <- replace_na(train_data$hrmn, mean(train_data$hrmn, na.rm = TRUE))
+train_data1=train_data
+
+```
+
+```{r}
+# Entraîner un modèle de régression linéaire
+model_lm <- lm(grav ~ ., data = train_data)
+predictions_lm <- predict(model_lm, test_data)
+```
+
+```{r}
+
+# Convertir la variable cible en numérique
+test_data$grav <- as.numeric(as.character(test_data$grav))
+
+# Remplacer les valeurs manquantes dans les prédictions par la moyenne
+predictions_lm <- replace_na(predictions_lm, mean(predictions_lm, na.rm = TRUE))
+
+# Convertir les prédictions en numérique
+predictions_lm <- as.numeric(predictions_lm)
+
+# Évaluer la performance du modèle
+mse <- mean((predictions_lm - test_data$grav)^2, na.rm = TRUE)
+print(paste("Mean Squared Error: ", mse))
+
+
+```
+```{r}
+summary(test_data)
+
+```
+```{r}
+# Installer les packages nécessaires
+#install.packages("pROC")
+#install.packages("randomForest")
+
+# Charger les bibliothèques
+library(randomForest)
+library(pROC)
+
+# Entraîner le modèle Random Forest
+model_rf <- randomForest(grav ~ ., data = train_data, ntree = 100)
+
+# Faire des prédictions sur l'ensemble de test
+predictions <- predict(model_rf, test_data)
+
+# Évaluer la performance du modèle
+confusion_matrix <- table(predictions, test_data$grav)
+print("Matrice de confusion :")
+print(confusion_matrix)
+
+# Calculer l'Accuracy
+accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+print(paste("Accuracy : ", accuracy))
+
+# Tracer la courbe ROC
+roc_curve <- roc(test_data$grav, as.numeric(predictions))
+plot(roc_curve, col = "blue", main = "Courbe ROC")
+
+```
+
+```{r}
+# Réentraîner un modèle de régression logistique
+model_logistic <- glm(grav ~ ., data = train_data, family = binomial)
+
+# Faire des prédictions sur l'ensemble de test
+predictions_logistic <- predict(model_logistic, newdata = test_data, type = "response")
+
+# Convertir les prédictions en classes
+predictions_class_logistic <- ifelse(predictions_logistic > 0.5, 1, 0)
+
+# Évaluer la performance du modèle
+confusion_matrix_logistic <- table(predictions_class_logistic, test_data$grav)
+print("Matrice de confusion (Régression Logistique) :")
+print(confusion_matrix_logistic)
+
+# Calculer l'Accuracy
+accuracy_logistic <- sum(diag(confusion_matrix_logistic)) / sum(confusion_matrix_logistic)
+print(paste("Accuracy (Régression Logistique) : ", accuracy_logistic))
+
+
+# Créer un nouveau graphique
+plot.new()
+
+# Tracer la première courbe ROC
+roc_curve_logistic <- roc(test_data$grav, as.numeric(predictions_logistic))
+plot(roc_curve_logistic, col = "red")
+
+# Ajouter d'autres courbes ROC
+#roc_curve_xgb <- roc(test_data$grav, as.numeric(predictions_xgb))
+#plot(roc_curve_xgb, col = "green", add = TRUE)
+
+# Ajouter d'autres courbes ROC si nécessaire
+# ...
+
+# Ajouter des légendes, titre, etc., selon vos besoins
+legend("bottomright", legend = c("Logistic Regression", "XGBoost"),
+       col = c("red", "green"), lty = 1)
+title("Courbe ROC")
+
+```
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
