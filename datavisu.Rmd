@@ -1,6 +1,6 @@
 ---
 title: "Untitled"
-author: "Hanounou Kanouté"
+author: "OZEN Nihal, Mokhtari Yassin, Hanounou Kanouté"
 date: "2023-09-11"
 output: html_document# metrre un lien flash up
 ---
